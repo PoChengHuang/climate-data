@@ -1,0 +1,55 @@
+---
+title: "climate data"
+author: "charles"
+date: "2017年7月5日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list = ls())
+```
+
+
+```{r}
+library(rvest)
+library(xml2)
+url = "http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=C0AC60&stname=%25E4%25B8%2589%25E5%25B3%25BD&datepicker=2017-01-05"
+page_source <- read_html(url,encoding = "UTF-8")
+title <- html_nodes(page_source, ".second_tr th")
+data <- html_nodes(page_source, ".CSSTableGenerator td")
+title_content <- html_text(title)
+datacontent <- html_text(data)
+```
+
+
+
+```{r}
+datavector<- as.vector(datacontent)
+row1<- datavector[1:15]
+row2<- datavector[16:30]
+row3<- datavector[31:45]
+row4<- datavector[46:60]
+row5<- datavector[61:75]
+row6<- datavector[76:90]
+row7<- datavector[91:105]
+row8<- datavector[106:120]
+row9<- datavector[121:135]
+row10<- datavector[136:150]
+row11<- datavector[151:165]
+row12<- datavector[166:180]
+row13<- datavector[181:195]
+row14<- datavector[196:210]
+row15<- datavector[211:225]
+row16<- datavector[226:240]
+row17<- datavector[241:255]
+row18<- datavector[256:270]
+row19<- datavector[271:285]
+row20<- datavector[286:300]
+row21<- datavector[301:315]
+row22<- datavector[316:330]
+row23<- datavector[331:345]
+row24<- datavector[346:360]
+data0105<- data.frame(title_content,row1,row2,row3,row4,row5,row6,row7,row8,row9,row10,row11,row12,row13,row14,row15,row16,row17,row18,row19,row20,row21,row22,row23,row24);data0105
+data0105.df<- as.data.frame(t(data0105),stringsAsFactors = FALSE);data0105.df
+#write.csv(data0105.df,file = "20170105.csv")
+```
