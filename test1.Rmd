@@ -50,13 +50,18 @@ row22<- datavector[316:330]
 row23<- datavector[331:345]
 row24<- datavector[346:360]
 data0105<- data.frame(title_content,row1,row2,row3,row4,row5,row6,row7,row8,row9,row10,row11,row12,row13,row14,row15,row16,row17,row18,row19,row20,row21,row22,row23,row24);data0105
-data0105.df<- as.data.frame(t(data0105),stringsAsFactors = FALSE);data0105.df
-write.csv(data0105.df,file = "20170105b.csv")
+
 ```
 
 ```{r}
-trytry<- gsub("<U+00A0>","",data0105.df,ignore.case = FALSE, perl = FALSE,
-     fixed = TRUE, useBytes = FALSE);trytry
-trytry1<- data.frame(trytry)
+data0105.df<- as.data.frame(t(data0105),stringsAsFactors = FALSE);data0105.df
+#write.csv(data0105.df,file = "20170105b.csv")
+```
+
+```{r}
+trytry<- lapply(data0105.df, function(x) {
+  gsub("<U+00A0>","",x,ignore.case = FALSE, 
+       perl = FALSE,fixed = TRUE, useBytes = FALSE)             });
+trytry<-as.data.frame(trytry)
 #save(trytry,file = "trytry.Rdata")
 ```
